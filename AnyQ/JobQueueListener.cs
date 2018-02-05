@@ -13,7 +13,7 @@ namespace AnyQ {
     /// <summary>
     /// Represents a process for handling incoming <see cref="JobRequest"/> objects and directing them to the appropriate <see cref="JobHandler"/>
     /// </summary>
-    public class JobQueueListener : IDisposable {
+    public sealed class JobQueueListener : IDisposable {
 
         private readonly IJobQueueFactory _jobQueueFactory;
         private readonly IListenerConfiguration _config;
@@ -80,12 +80,8 @@ namespace AnyQ {
         /// Fired when a <see cref="JobStatus"/> report is generated
         /// </summary>
         public event EventHandler<StatusReportedEventArgs> StatusReported;
-
-        /// <summary>
-        /// Invoke the <see cref="StatusReported"/> event
-        /// </summary>
-        /// <param name="status">Status being reported</param>
-        protected virtual void OnStatusReported(JobStatus status) {
+        
+        private void OnStatusReported(JobStatus status) {
             StatusReported?.Invoke(this, new StatusReportedEventArgs(status));
         }
 
@@ -323,15 +319,16 @@ namespace AnyQ {
         /// </summary>
         /// <param name="request">Request to process</param>
         /// <param name="handler">Handler to handle the job</param>
-        /// <returns>Returns true if the processing </returns>
-        protected virtual Task HandleJob(ProcessingRequest request, JobHandler handler) {
+        private Task HandleJob(ProcessingRequest request, JobHandler handler) {
 
             var cts = new CancellationTokenSource();
             if (_config.JobTimeout > 0) {
                 cts.CancelAfter(_config.JobTimeout);
             }
 
-            return handler.ProcessAsync(request, cts.Token);
+            using (cts) {
+                return handler.ProcessAsync(request, cts.Token);
+            }
         }
 
         private void OnProcessingTimedOut(object sender, ProcessingFailedEventArgs e) {
@@ -436,7 +433,7 @@ namespace AnyQ {
         /// Releases all resources used by the <see cref="JobQueueListener"/>
         /// </summary>
         /// <param name="disposing">Whether or not the object is already being disposed</param>
-        protected virtual void Dispose(bool disposing) {
+        private void Dispose(bool disposing) {
             if (!_disposedValue) {
                 if (disposing) {
                     foreach (var queue in _queues.Values) {
