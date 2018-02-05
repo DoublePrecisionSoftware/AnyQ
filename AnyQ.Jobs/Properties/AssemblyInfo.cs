@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AnyQ.Jobs")]
 [assembly: AssemblyDescription("AnyQ Jobs lib")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Centeva, LLC")]
+[assembly: AssemblyCompany("DoublePrecision Software")]
 [assembly: AssemblyProduct("AnyQ")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

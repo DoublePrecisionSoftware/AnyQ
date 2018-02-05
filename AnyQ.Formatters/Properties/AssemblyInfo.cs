@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AnyQ.Formatters")]
 [assembly: AssemblyDescription("Formatting interfaces for AnyQ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Centeva, LLC")]
+[assembly: AssemblyCompany("DoublePrecision Software")]
 [assembly: AssemblyProduct("AnyQ")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

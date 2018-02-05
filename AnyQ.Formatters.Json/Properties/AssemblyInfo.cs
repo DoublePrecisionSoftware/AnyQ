@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AnyQ.Formatters.Json")]
 [assembly: AssemblyDescription("JSON.NET Formatter for AnyQ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Centeva, LLC")]
+[assembly: AssemblyCompany("DoublePrecision Software")]
 [assembly: AssemblyProduct("AnyQ.Formatters.Json")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
