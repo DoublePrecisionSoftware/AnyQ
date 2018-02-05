@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52B2F05D-099B-4C0E-8593-1256A2C3D9F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AnyQ</RootNamespace>
+    <AssemblyName>AnyQ</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AnyQ.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>.pdb</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IListenerConfiguration.cs" />
+    <Compile Include="MessageNotFoundException.cs" />
+    <Compile Include="QueueNotAvailableException.cs" />
+    <Compile Include="Queues\Extensions.cs" />
+    <Compile Include="Queues\IJobQueueFactory.cs" />
+    <Compile Include="Queues\IJobQueueReceiver.cs" />
+    <Compile Include="Queues\IJobQueueSender.cs" />
+    <Compile Include="Queues\IMessage.cs" />
+    <Compile Include="Queues\IMessageFactory.cs" />
+    <Compile Include="Queues\IMessageQueue.cs" />
+    <Compile Include="Queues\IMessageQueueFactory.cs" />
+    <Compile Include="Queues\IRequestSerializer.cs" />
+    <Compile Include="Queues\JobEventArgs.cs" />
+    <Compile Include="Queues\JobQueue.cs" />
+    <Compile Include="JobQueueListener.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queues\QueueCreationOptions.cs" />
+    <Compile Include="Queues\ReceivedMessageEventArgs.cs" />
+    <Compile Include="RequestRedirectedEventArgs.cs" />
+    <Compile Include="ServiceNotAvailableException.cs" />
+    <Compile Include="StatusReportedEventArgs.cs" />
+    <Compile Include="Status\IStatusProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnyQ.Formatters\AnyQ.Formatters.csproj">
+      <Project>{0B749E53-9E95-4936-92D3-BF2B2D721A4D}</Project>
+      <Name>AnyQ.Formatters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnyQ.Jobs\AnyQ.Jobs.csproj">
+      <Project>{e5ae5bb0-a85b-46bd-a9cf-1f70d1744fef}</Project>
+      <Name>AnyQ.Jobs</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AnyQ.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
