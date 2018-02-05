@@ -1,0 +1,1 @@
+..\cov-analysis-win64-2017.07\bin\cov-build --dir cov-int MSBuild AnyQ.Coverity.sln /m /p:Configuration=Release /t:Rebuild
