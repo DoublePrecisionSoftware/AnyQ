@@ -10,8 +10,8 @@
     <description>$description$</description>
     <copyright>Copyright 2017</copyright>
     <tags>MSMQ AnyQ</tags>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Messaging"  targetFramework="net40" />
-    </frameworkAssemblies>
   </metadata>
+  <frameworkAssemblies>
+    <frameworkAssembly assemblyName="System.Messaging"  targetFramework="net45" />
+  </frameworkAssemblies>
 </package>
