@@ -3,7 +3,7 @@ using AnyQ.Jobs;
 using System;
 
 namespace AnyQ.Queues.Msmq {
-    class MsmqJobQueueFactory : IJobQueueFactory {
+    public class MsmqJobQueueFactory : IJobQueueFactory {
         private MsmqMessageQueueFactory _queueFactory;
         private MsmqMessageFactory _messageFactory;
         private IPayloadFormatter _payloadFormatter;
