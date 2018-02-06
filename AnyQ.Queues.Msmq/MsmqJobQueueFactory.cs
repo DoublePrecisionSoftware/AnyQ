@@ -9,9 +9,12 @@ namespace AnyQ.Queues.Msmq {
         private IPayloadFormatter _payloadFormatter;
         private IRequestSerializer _requestSerializer;
 
-        public MsmqJobQueueFactory(IPayloadFormatter payloadFormatter, IRequestSerializer requestSerializer) {
+        public MsmqJobQueueFactory(
+            IPayloadFormatter payloadFormatter, 
+            IRequestSerializer requestSerializer,
+            System.Messaging.AccessControlList accessControlList = null) {
 
-            _queueFactory = new MsmqMessageQueueFactory(new System.Messaging.AccessControlList());
+            _queueFactory = new MsmqMessageQueueFactory(accessControlList);
             _messageFactory = new MsmqMessageFactory();
             _payloadFormatter = payloadFormatter;
             _requestSerializer = requestSerializer;
