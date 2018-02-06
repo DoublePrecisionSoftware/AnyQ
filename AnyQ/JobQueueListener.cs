@@ -16,7 +16,7 @@ namespace AnyQ {
     public sealed class JobQueueListener : IDisposable {
 
         private readonly InternalJobQueueFactory _jobQueueFactory;
-        private readonly IListenerConfiguration _config;
+        private readonly ListenerConfiguration _config;
         private readonly List<IStatusProvider> _statusProviders = new List<IStatusProvider>();
         private readonly InternalJobHandlerLocator _handlerLocator;
         private readonly Dictionary<string, JobQueue> _queues = new Dictionary<string, JobQueue>();
@@ -29,7 +29,7 @@ namespace AnyQ {
         /// </summary>
         /// <param name="jobQueueFactory">Factory for creating appropriate <see cref="JobQueue"/> objects</param>
         /// <param name="config">Configuration value for this listener</param>
-        public JobQueueListener(IJobQueueFactory jobQueueFactory, IListenerConfiguration config) {
+        public JobQueueListener(IJobQueueFactory jobQueueFactory, ListenerConfiguration config) {
             if (jobQueueFactory == null) {
                 throw new ArgumentNullException(nameof(jobQueueFactory));
             }
@@ -45,7 +45,7 @@ namespace AnyQ {
         /// <param name="jobQueueFactory">Factory for creating appropriate <see cref="JobQueue"/> objects</param>
         /// <param name="config">Configuration value for this listener</param>
         /// <param name="statusProvider">Provider for writing job status changes</param>
-        public JobQueueListener(IJobQueueFactory jobQueueFactory, IListenerConfiguration config, IStatusProvider statusProvider)
+        public JobQueueListener(IJobQueueFactory jobQueueFactory, ListenerConfiguration config, IStatusProvider statusProvider)
             : this(jobQueueFactory, config) {
             if (statusProvider == null) {
                 throw new ArgumentNullException(nameof(statusProvider));
@@ -69,7 +69,7 @@ namespace AnyQ {
         public event EventHandler<ProcessingCompletedEventArgs> ProcessingCompleted;
         /// <summary>
         /// Fired when a <see cref="JobHandler.ProcessAsync(ProcessingRequest, CancellationToken)"/> call times out<para />
-        /// (see <see cref="IListenerConfiguration.JobTimeout"/>)
+        /// (see <see cref="ListenerConfiguration.JobTimeout"/>)
         /// </summary>
         public event EventHandler<ProcessingFailedEventArgs> ProcessingTimedOut;
         /// <summary>
@@ -454,9 +454,9 @@ namespace AnyQ {
         private class InternalJobQueueFactory : IJobQueueFactory {
             private readonly Dictionary<string, JobQueue> _queues;
             private readonly IJobQueueFactory _jobQueueFactory;
-            private readonly IListenerConfiguration _listenerConfiguration;
+            private readonly ListenerConfiguration _listenerConfiguration;
 
-            public InternalJobQueueFactory(Dictionary<string, JobQueue> queues, IJobQueueFactory depFactory, IListenerConfiguration listenerConfiguration) {
+            public InternalJobQueueFactory(Dictionary<string, JobQueue> queues, IJobQueueFactory depFactory, ListenerConfiguration listenerConfiguration) {
                 _queues = queues;
                 _jobQueueFactory = depFactory;
                 _listenerConfiguration = listenerConfiguration;
@@ -489,9 +489,9 @@ namespace AnyQ {
         private class InternalJobHandlerLocator : IJobHandlerLocator {
             private readonly List<IJobHandlerLocator> _locators = new List<IJobHandlerLocator>();
             private readonly List<JobHandler> _handlers = new List<JobHandler>();
-            private readonly IListenerConfiguration _listenerConfiguration;
+            private readonly ListenerConfiguration _listenerConfiguration;
 
-            public InternalJobHandlerLocator(IListenerConfiguration listenerConfiguration) {
+            public InternalJobHandlerLocator(ListenerConfiguration listenerConfiguration) {
                 _listenerConfiguration = listenerConfiguration;
             }
 

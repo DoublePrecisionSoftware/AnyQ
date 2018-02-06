@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IListenerConfiguration.cs" />
+    <Compile Include="ListenerConfiguration.cs" />
     <Compile Include="MessageNotFoundException.cs" />
     <Compile Include="QueueNotAvailableException.cs" />
     <Compile Include="Queues\Extensions.cs" />

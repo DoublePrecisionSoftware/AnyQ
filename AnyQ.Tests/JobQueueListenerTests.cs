@@ -18,7 +18,7 @@ namespace AnyQ.Tests {
         
         private IFixture _fixture;
         private FakeJobQueueFactory _jobQueueFactory;
-        private Mock<IListenerConfiguration> _mockListenerConfiguration;
+        private Mock<ListenerConfiguration> _mockListenerConfiguration;
         private Mock<IStatusProvider> _mockStatusProvider;
         private JobQueueListener _sut;
 
@@ -28,7 +28,7 @@ namespace AnyQ.Tests {
                 .Customize(new AutoMoqCustomization());
 
             _jobQueueFactory = new FakeJobQueueFactory(_fixture);
-            _mockListenerConfiguration = _fixture.Freeze<Mock<IListenerConfiguration>>();
+            _mockListenerConfiguration = _fixture.Freeze<Mock<ListenerConfiguration>>();
             _mockStatusProvider = _fixture.Freeze<Mock<IStatusProvider>>();
             _sut = new JobQueueListener(_jobQueueFactory, _mockListenerConfiguration.Object, _mockStatusProvider.Object);
         }
@@ -378,10 +378,12 @@ namespace AnyQ.Tests {
         [Timeout(5000)]
         public void ProcessingTimedOut_Raised_On_Hung_Job() {
 
-            var config = _fixture.Create<Mock<IListenerConfiguration>>();
-            config.SetupGet(m => m.JobTimeout).Returns(2000);
+            var config = new ListenerConfiguration {
+                JobTimeout = 2000,
+                QueuePrefix = string.Empty,
+            };
 
-            var sut = new JobQueueListener(_jobQueueFactory, config.Object);
+            var sut = new JobQueueListener(_jobQueueFactory, config);
 
             var mockHandler = sut.AddFakeHandler(_fixture.Create<HandlerConfiguration>(), true, true);
 
