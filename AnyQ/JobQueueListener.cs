@@ -15,7 +15,7 @@ namespace AnyQ {
     /// </summary>
     public sealed class JobQueueListener : IDisposable {
 
-        private readonly IJobQueueFactory _jobQueueFactory;
+        private readonly InternalJobQueueFactory _jobQueueFactory;
         private readonly IListenerConfiguration _config;
         private readonly List<IStatusProvider> _statusProviders = new List<IStatusProvider>();
         private readonly InternalJobHandlerLocator _handlerLocator;
