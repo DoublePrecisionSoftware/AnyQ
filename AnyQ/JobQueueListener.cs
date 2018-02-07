@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -376,26 +375,29 @@ namespace AnyQ {
 
         private void Redirect(JobStatus status, ProcessingRequest request, Exception exception) {
             if (_queueRedirects.TryGetValue(request.QueueId, out var strategy)) {
-                var (newMessage, newQueue) = ExecuteRedirect(strategy, status, request, exception);
-                if (newMessage != null) {
-                    RequestRedirected?.Invoke(this, new RequestRedirectedEventArgs(newMessage, request.QueueId, newQueue));
+                var result = ExecuteRedirect(strategy, status, request, exception);
+                if (result != null) {
+                    RequestRedirected?.Invoke(this, new RequestRedirectedEventArgs(result.Message, request.QueueId, result.NewQueue));
                 }
             }
         }
 
         /// <remarks>Returning null from this method causes the calling code to ignore the redirect</remarks>
-        private (IMessage message, string toQueue) ExecuteRedirect(RedirectStrategy strategy, JobStatus status, ProcessingRequest request, Exception exception) {
+        private RedirectResult ExecuteRedirect(RedirectStrategy strategy, JobStatus status, ProcessingRequest request, Exception exception) {
             if (!strategy.Decider(status, exception)) {
-                return (null, null);
+                return null;
             }
             var newQueue = strategy.Redirect(status);
             if (string.IsNullOrWhiteSpace(newQueue)) {
-                return (null, null);
+                return null;
             }
 
             var message = SendJob(newQueue, request.JobRequest.Type, request.JobRequest.Payload, request.Name);
             WriteStatus(request, JobStatus.Redirected, $"New Queue: {newQueue} Message Id: {message.Id}", false);
-            return (message, newQueue);
+            return new RedirectResult {
+                Message = message,
+                NewQueue = newQueue
+            };
         }
 
 
@@ -524,6 +526,11 @@ namespace AnyQ {
                 outHandler = null;
                 return false;
             }
+        }
+
+        private class RedirectResult {
+            public IMessage Message { get; set; }
+            public string NewQueue { get; set; }
         }
     }
 }
