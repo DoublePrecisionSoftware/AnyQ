@@ -524,7 +524,7 @@ namespace AnyQ {
                     }
                 }
 
-                Trace.TraceWarning($"Handler for queue '{queueId}' not found.");
+                Trace.TraceWarning($"Handler for queue '{id}' not found.");
                 outHandler = null;
                 return false;
             }
