@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AnyQ.Queues.Msmq")]
-[assembly: AssemblyDescription("AnyQ extension for MSMQ")]
+[assembly: AssemblyDescription("MSMQ extensions for AnyQ")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Centeva")]
+[assembly: AssemblyCompany("DoublePrecision Software")]
 [assembly: AssemblyProduct("AnyQ.Queues.Msmq")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
