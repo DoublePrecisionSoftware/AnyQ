@@ -462,8 +462,7 @@ namespace AnyQ {
                 _listenerConfiguration = listenerConfiguration;
             }
 
-            public JobQueue Create(string id) {
-                var queueId = _listenerConfiguration.QueuePrefix + id;
+            public JobQueue Create(string queueId) {
                 if (_queues.TryGetValue(queueId, out var queue)) {
                     return queue;
                 }
@@ -471,7 +470,6 @@ namespace AnyQ {
             }
 
             public JobQueue Create(HandlerConfiguration configuration) {
-                configuration.QueueId = _listenerConfiguration.QueuePrefix + configuration.QueueId;
                 try {
                     var newQueue = _jobQueueFactory.Create(configuration);
                     _queues.Add(newQueue.QueueId, newQueue);
@@ -507,9 +505,7 @@ namespace AnyQ {
                 return _locators.SelectMany(l => l.GetHandlers()).Union(_handlers);
             }
 
-            public bool TryGetHandlerByQueueId(string id, out JobHandler outHandler) {
-                var prefix = string.IsNullOrWhiteSpace(_listenerConfiguration.QueuePrefix) ? string.Empty : _listenerConfiguration.QueuePrefix;
-                var queueId = Regex.Replace(id, "^" + Regex.Escape(prefix), string.Empty);
+            public bool TryGetHandlerByQueueId(string queueId, out JobHandler outHandler) {
 
                 foreach (var locator in _locators) {
                     if (locator.TryGetHandlerByQueueId(queueId, out outHandler)) {
@@ -524,7 +520,7 @@ namespace AnyQ {
                     }
                 }
 
-                Trace.TraceWarning($"Handler for queue '{id}' not found.");
+                Trace.TraceWarning($"Handler for queue '{queueId}' not found.");
                 outHandler = null;
                 return false;
             }

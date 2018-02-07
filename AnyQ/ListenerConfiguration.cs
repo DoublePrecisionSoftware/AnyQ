@@ -8,10 +8,5 @@
         /// Amount of time in milliseconds before a job is canceled and the status is reported as "TimedOut"
         /// </summary>
         public int JobTimeout { get; set; }
-
-        /// <summary>
-        /// Prefix to append to all queue identifiers
-        /// </summary>
-        public string QueuePrefix { get; set; }
     }
 }

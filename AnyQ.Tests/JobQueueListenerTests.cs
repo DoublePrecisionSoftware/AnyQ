@@ -379,8 +379,7 @@ namespace AnyQ.Tests {
         public void ProcessingTimedOut_Raised_On_Hung_Job() {
 
             var config = new ListenerConfiguration {
-                JobTimeout = 2000,
-                QueuePrefix = string.Empty,
+                JobTimeout = 2000
             };
 
             var sut = new JobQueueListener(_jobQueueFactory, config);
