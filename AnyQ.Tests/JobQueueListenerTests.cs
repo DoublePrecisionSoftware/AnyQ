@@ -30,7 +30,7 @@ namespace AnyQ.Tests {
             _jobQueueFactory = new FakeJobQueueFactory(_fixture);
             _mockListenerConfiguration = _fixture.Freeze<Mock<ListenerConfiguration>>();
             _mockStatusProvider = _fixture.Freeze<Mock<IStatusProvider>>();
-            _sut = new JobQueueListener(_jobQueueFactory, _mockListenerConfiguration.Object, _mockStatusProvider.Object);
+            _sut = new JobQueueListener(_jobQueueFactory, _mockListenerConfiguration.Object);
         }
 
 
@@ -38,18 +38,6 @@ namespace AnyQ.Tests {
         [ExpectedException(typeof(ArgumentNullException))]
         public void Contructor_Gaurds_Against_Null_JobQueueFactory() {
             var sut = new JobQueueListener(null, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Contructor_Gaurds_Against_Null_Configuration() {
-            var sut = new JobQueueListener(_jobQueueFactory, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Contructor_Gaurds_Against_Null_Provider() {
-            var sut = new JobQueueListener(_jobQueueFactory, _mockListenerConfiguration.Object, null);
         }
 
         [TestMethod]
@@ -226,6 +214,8 @@ namespace AnyQ.Tests {
 
             var mockHandler = _sut.AddMockHandler(_fixture);
 
+            _sut.AddStatusProvider(_mockStatusProvider.Object);
+
             _sut.ExecuteJobAsync(mockHandler.Object.Configuration.QueueId, "test");
 
             _mockStatusProvider.Verify(m => m.WriteStatus(It.IsAny<JobStatus>()), Times.AtLeastOnce());
@@ -247,6 +237,7 @@ namespace AnyQ.Tests {
 
             var mockHandler = _sut.AddMockHandler(_fixture);
 
+            _sut.AddStatusProvider(_mockStatusProvider.Object);
             _sut.Stop(true);
             _sut.ExecuteJobAsync(mockHandler.Object.Configuration.QueueId, "test");
 
@@ -261,6 +252,8 @@ namespace AnyQ.Tests {
 
             var mockHandler = _sut.AddMockHandler(_fixture);
 
+            _sut.AddStatusProvider(_mockStatusProvider.Object);
+
             _sut.ExecuteJobAsync("test", "test");
         }
 
@@ -269,6 +262,8 @@ namespace AnyQ.Tests {
 
             var mockHandler = _sut.AddMockHandler(_fixture);
             mockHandler.Setup(m => m.CanProcess(It.IsAny<ProcessingRequest>())).Returns(false);
+
+            _sut.AddStatusProvider(_mockStatusProvider.Object);
 
             _sut.ExecuteJobAsync(mockHandler.Object.Configuration.QueueId, "test");
 
@@ -344,6 +339,8 @@ namespace AnyQ.Tests {
 
             var locator = new FakeJobHandlerLocator(_fixture);
             var fakeHandler = locator.AddFakeHandler(_fixture.Create<HandlerConfiguration>());
+
+            _sut.AddStatusProvider(_mockStatusProvider.Object);
 
             _sut.AddHandlerLocator(locator);
             

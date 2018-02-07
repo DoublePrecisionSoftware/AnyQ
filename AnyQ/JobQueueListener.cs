@@ -28,29 +28,14 @@ namespace AnyQ {
         /// </summary>
         /// <param name="jobQueueFactory">Factory for creating appropriate <see cref="JobQueue"/> objects</param>
         /// <param name="config">Configuration value for this listener</param>
-        public JobQueueListener(IJobQueueFactory jobQueueFactory, ListenerConfiguration config) {
+        public JobQueueListener(IJobQueueFactory jobQueueFactory, ListenerConfiguration config = null) {
             if (jobQueueFactory == null) {
                 throw new ArgumentNullException(nameof(jobQueueFactory));
             }
 
-            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _config = config ?? new ListenerConfiguration();
             _jobQueueFactory = new InternalJobQueueFactory(_queues, jobQueueFactory, _config);
             _handlerLocator = new InternalJobHandlerLocator(_config);
-        }
-
-        /// <summary>
-        /// Create a new instance of <see cref="JobQueueListener"/> with all required dependencies
-        /// </summary>
-        /// <param name="jobQueueFactory">Factory for creating appropriate <see cref="JobQueue"/> objects</param>
-        /// <param name="config">Configuration value for this listener</param>
-        /// <param name="statusProvider">Provider for writing job status changes</param>
-        public JobQueueListener(IJobQueueFactory jobQueueFactory, ListenerConfiguration config, IStatusProvider statusProvider)
-            : this(jobQueueFactory, config) {
-            if (statusProvider == null) {
-                throw new ArgumentNullException(nameof(statusProvider));
-            }
-
-            _statusProviders.Add(statusProvider);
         }
 
         /// <summary>
