@@ -6,7 +6,7 @@ namespace AnyQ.Queues {
     /// </summary>
     public interface IJobQueueReceiver {
         /// <summary>
-        /// Fired when a <see cref="Jobs.ProcessingRequest"/> is generated from an <see cref="IMessage"/> is 
+        /// Fired when a <see cref="Jobs.ProcessingRequest"/> is generated from an <see cref="IMessage"/>
         /// </summary>
         event EventHandler<JobReceivedEventArgs> JobReceived;
 
