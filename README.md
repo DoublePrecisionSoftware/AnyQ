@@ -34,21 +34,7 @@ Upon calling `Listen()`, AnyQ will begin sending jobs to your `JobHandlers` for 
 
 ## API Reference
 
-### `JobHandler`
-
-`JobHandler` is an abstract class that requires implementing 3 members:
-
-- The `Configuration` property exposes the a `HandlerConfiguration` instance that defines information about the queue the handler will listen to.
-- The `bool CanProcess(ProcessingRequest request)` accepts a `ProcessingRequest` object and returns a boolean indicating if the request can be fulfilled.
-- The `Task ProcessAsync(ProcessingRequest request, CancellationToken cancellationToken)` method performs the work required by the job.
-
-#### `JobHandler` Notes
-
-The `JobHandler` abstract class provides two events: `ProcessingCompleted`, and `ProcessingFailed`.
-Calling `OnProcessingCompleted()` in `ProcessAsync()` is required in order for a job to be flagged as "Complete."
-Calling `OnProcessingFailed()`, however, is not strictly necessary as AnyQ will catch any unhandled exceptions.  It is there for convenience only.
-
-### (More on the way)
+(see the [Wiki](https://github.com/DoublePrecisionSoftware/AnyQ/wiki))
 
 ## Builing AnyQ
 
