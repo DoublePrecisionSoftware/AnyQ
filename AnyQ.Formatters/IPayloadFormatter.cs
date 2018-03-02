@@ -7,7 +7,7 @@
         /// Write the data to a <see cref="string"/>
         /// </summary>
         /// <param name="payload">Object containing the payload data</param>
-        string Write(object payload);
+        byte[] Write(object payload);
         /// <summary>
         /// Deserialize the payload string into an instance of <typeparamref name="T"/>
         /// </summary>

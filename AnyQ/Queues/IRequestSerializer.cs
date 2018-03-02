@@ -1,5 +1,6 @@
 ﻿using AnyQ.Jobs;
 using System.IO;
+using System.Text;
 
 namespace AnyQ.Queues {
     /// <summary>
@@ -10,11 +11,13 @@ namespace AnyQ.Queues {
         /// Serialize the <see cref="JobRequest"/> into a <see cref="Stream"/>
         /// </summary>
         /// <param name="request">Job request</param>
-        Stream Serialize(JobRequest request);
+        byte[] Serialize(JobRequest request);
         /// <summary>
         /// Deserialize a <see cref="Stream"/> from an <see cref="IMessage.Body"/> into a <see cref="JobRequest"/>
         /// </summary>
         /// <param name="request"><see cref="byte[]"/> from an <see cref="IMessage.Body"/></param>
         JobRequest Deserialize(byte[] request);
+
+        Encoding Encoding { get; }
     }
 }

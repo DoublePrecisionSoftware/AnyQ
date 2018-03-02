@@ -10,7 +10,7 @@
         /// <summary>
         /// Serialized data for use by the job handler
         /// </summary>
-        public string Payload { get; set; }
+        public byte[] Payload { get; set; }
 
         /// <summary>
         /// Returns a simple description of the job
