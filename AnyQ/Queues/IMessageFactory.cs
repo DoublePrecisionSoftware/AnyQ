@@ -9,8 +9,7 @@ namespace AnyQ.Queues {
         /// Create an <see cref="IMessage"/> with the provided bytes for creating the body
         /// </summary>
         /// <param name="body">Byte array making up the body of the message</param>
-        /// <param name="encoding">Encoding in which the data is stored</param>
         /// <param name="label">Human-readable name for the message</param>
-        IMessage Create(byte[] body, Encoding encoding, string label);
+        IMessage Create(byte[] body, string label);
     }
 }

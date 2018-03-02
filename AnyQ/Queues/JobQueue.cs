@@ -105,7 +105,7 @@ namespace AnyQ.Queues {
             };
 
             var bodyStream = _serializer.Serialize(request);
-            var message = _messageFactory.Create(bodyStream, _serializer.Encoding, messageLabel);
+            var message = _messageFactory.Create(bodyStream, messageLabel);
 
             var msg = _queue.Send(message);
             return msg;
