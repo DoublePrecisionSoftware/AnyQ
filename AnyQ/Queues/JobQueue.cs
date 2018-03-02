@@ -89,7 +89,7 @@ namespace AnyQ.Queues {
         }
 
         private JobRequest CreateJobRequest(IMessage message) {
-            return _serializer.Deserialize(message.BodyStream);
+            return _serializer.Deserialize(message.Body);
         }
 
         /// <summary>

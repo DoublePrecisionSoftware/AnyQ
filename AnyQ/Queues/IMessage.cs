@@ -17,6 +17,6 @@ namespace AnyQ.Queues {
         /// <summary>
         /// <see cref="Stream"/> containing the message data (a JobRequest object)
         /// </summary>
-        Stream BodyStream { get; }
+        byte[] Body { get; }
     }
 }

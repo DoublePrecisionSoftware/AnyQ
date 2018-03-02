@@ -79,7 +79,7 @@ namespace AnyQ.Queues.Tests {
 
             _mockQueue.Setup(m => m.GetMessage(It.IsAny<string>()))
                 .ReturnsUsingFixture(_fixture);
-            _mockRequestSerializer.Setup(m => m.Deserialize(It.IsAny<Stream>()))
+            _mockRequestSerializer.Setup(m => m.Deserialize(It.IsAny<byte[]>()))
                 .ReturnsUsingFixture(_fixture);
 
             var request = _sut.GetProcessingRequest("test");

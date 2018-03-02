@@ -3,7 +3,7 @@ using System.IO;
 
 namespace AnyQ.Queues {
     /// <summary>
-    /// Provides mechanisms for converting a <see cref="JobRequest"/> to and from a <see cref="Stream"/> for use in an <see cref="IMessage.BodyStream"/>
+    /// Provides mechanisms for converting a <see cref="JobRequest"/> to and from a <see cref="Stream"/> for use in an <see cref="IMessage.Body"/>
     /// </summary>
     public interface IRequestSerializer {
         /// <summary>
@@ -12,9 +12,9 @@ namespace AnyQ.Queues {
         /// <param name="request">Job request</param>
         Stream Serialize(JobRequest request);
         /// <summary>
-        /// Deserialize a <see cref="Stream"/> from an <see cref="IMessage.BodyStream"/> into a <see cref="JobRequest"/>
+        /// Deserialize a <see cref="Stream"/> from an <see cref="IMessage.Body"/> into a <see cref="JobRequest"/>
         /// </summary>
-        /// <param name="request"><see cref="Stream"/> from an <see cref="IMessage.BodyStream"/></param>
-        JobRequest Deserialize(Stream request);
+        /// <param name="request"><see cref="byte[]"/> from an <see cref="IMessage.Body"/></param>
+        JobRequest Deserialize(byte[] request);
     }
 }
