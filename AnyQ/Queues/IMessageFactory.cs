@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 
 namespace AnyQ.Queues {
     /// <summary>
@@ -7,11 +6,11 @@ namespace AnyQ.Queues {
     /// </summary>
     public interface IMessageFactory {
         /// <summary>
-        /// Create an <see cref="IMessage"/> with the provided <see cref="Stream"/> for creating the body
+        /// Create an <see cref="IMessage"/> with the provided bytes for creating the body
         /// </summary>
-        /// <param name="bodyStream"><see cref="Stream"/> containing the body</param>
+        /// <param name="body">Byte array making up the body of the message</param>
         /// <param name="encoding">Encoding in which the data is stored</param>
         /// <param name="label">Human-readable name for the message</param>
-        IMessage Create(Stream bodyStream, Encoding encoding, string label);
+        IMessage Create(byte[] body, Encoding encoding, string label);
     }
 }
