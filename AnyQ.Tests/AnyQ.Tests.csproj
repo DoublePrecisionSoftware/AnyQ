@@ -70,6 +70,7 @@
     <Compile Include="Fakes\FakeJobHandler.cs" />
     <Compile Include="Fakes\FakeMessageQueueFactory.cs" />
     <Compile Include="JobQueueListenerTests.cs" />
+    <Compile Include="JsonPayloadFormatterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queues\JobQueueTests.cs" />
     <Compile Include="TestExtensions.cs" />
@@ -78,6 +79,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnyQ.Formatters.Json\AnyQ.Formatters.Json.csproj">
+      <Project>{0441AC29-6869-4412-98C5-4C3315C1208E}</Project>
+      <Name>AnyQ.Formatters.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AnyQ.Formatters\AnyQ.Formatters.csproj">
       <Project>{0b749e53-9e95-4936-92d3-bf2b2d721a4d}</Project>
       <Name>AnyQ.Formatters</Name>

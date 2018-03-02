@@ -15,7 +15,7 @@ namespace AnyQ.Queues {
         /// <summary>
         /// Deserialize a <see cref="Stream"/> from an <see cref="IMessage.Body"/> into a <see cref="JobRequest"/>
         /// </summary>
-        /// <param name="request"><see cref="byte[]"/> from an <see cref="IMessage.Body"/></param>
+        /// <param name="request">Byte array from an <see cref="IMessage.Body"/></param>
         JobRequest Deserialize(byte[] request);
 
         Encoding Encoding { get; }

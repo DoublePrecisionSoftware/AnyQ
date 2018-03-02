@@ -4,7 +4,7 @@
     /// </summary>
     public interface IPayloadFormatter {
         /// <summary>
-        /// Write the data to a <see cref="string"/>
+        /// Write the data to a byte array
         /// </summary>
         /// <param name="payload">Object containing the payload data</param>
         byte[] Write(object payload);
@@ -12,7 +12,7 @@
         /// Deserialize the payload string into an instance of <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Type of data represented in the payload</typeparam>
-        /// <param name="payloadString"><see cref="string"/> containing the serialized payload data</param>
-        T Read<T>(string payloadString) where T : class;
+        /// <param name="payload">Byte array containing the serialized payload data</param>
+        T Read<T>(byte[] payload) where T : class;
     }
 }

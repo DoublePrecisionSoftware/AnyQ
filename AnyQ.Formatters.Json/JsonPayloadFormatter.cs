@@ -18,7 +18,13 @@ namespace AnyQ.Formatters {
         /// </summary>
         /// <typeparam name="T">Type of data represented in the payload</typeparam>
         /// <param name="payloadString"><see cref="string"/> containing the serialized payload data</param>
-        public T Read<T>(string payloadString) where T : class {
+        public T Read<T>(byte[] payload) where T : class {
+            if (payload == null) {
+                throw new ArgumentNullException(nameof(payload));
+            }
+
+            var payloadString = _encoding.GetString(payload);
+
             if (string.IsNullOrWhiteSpace(payloadString)) {
                 return null;
             }
