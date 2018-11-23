@@ -1,5 +1,5 @@
 site_name: AnyQ Documentation
-nav:
+pages:
   - Home: 'index.md'
   - Introduction:
     - 'Getting Started': 'getting-started.md'
