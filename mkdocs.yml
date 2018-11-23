@@ -1,0 +1,10 @@
+site_name: AnyQ Documentation
+nav:
+  - Home: 'index.md'
+  - Introduction: 
+    - 'Getting Started': 'getting-started.md'
+    - 'Writing Job Handlers': 'job-handlers.md'
+  - API Reference: 
+    - 'Core Library': 'core-api.md'
+    - 'Job Handlers': 'jobs-api.md'
+theme: readthedocs
