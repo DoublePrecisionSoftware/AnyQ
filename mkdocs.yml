@@ -1,14 +1,14 @@
 site_name: AnyQ Documentation
 nav:
   - Home: 'index.md'
-  - Introduction: 
+  - Introduction:
     - 'Getting Started': 'getting-started.md'
     - 'Writing Job Handlers': 'job-handlers.md'
     - 'Serialization': 'serialization.md'
     - 'Logging': 'logging.md'
     - 'Queue Implementations': 'impl-libs.md'
+    - 'Retreiving Job Status': 'job-status.md'
   - API Reference: 
     - 'Core Library': 'core-api.md'
     - 'Job Handlers': 'jobs-api.md'
-    - 'Retreiving Job Status': 'status-api.md'
 theme: readthedocs

@@ -1,4 +1,4 @@
-# Getting Started with AnyQ
+# Basic Implementation
 
 AnyQ is designed to use in .NET 4.5 and above projects.
 
