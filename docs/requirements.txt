@@ -9,7 +9,7 @@ livereload==2.6.0
 Markdown==3.0.1
 MarkupSafe==1.1.0
 mccabe==0.6.1
-mkdocs==1.0.4
+mkdocs==1.2.3
 pylint==2.1.1
 PyYAML==5.1
 six==1.11.0
